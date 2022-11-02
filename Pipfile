@@ -7,6 +7,7 @@ name = "pypi"
 sklearn = "*"
 numpy = "*"
 pandas = "*"
+xgboost = "*"
 
 [dev-packages]
 ipython = "*"
@@ -14,6 +15,7 @@ jupyter = "*"
 matplotlib = "*"
 seaborn = "*"
 pyarrow = "*"
+ipykernel = "*"
 
 [requires]
 python_version = "3.9"
