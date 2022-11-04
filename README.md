@@ -6,21 +6,46 @@ ML project to predict the weight of a fish from its dimensions.
 
 ## Dataset description
 
-
 ## How to run
 
+### Clone
+git clone ""
+
 ### Setup
-pip install -U pip
-pip install pipenv
-pipenv install --dev
-### Development
-jupyter notebook
-train.py
-serve.py
+Recommended to install Anaconda  
+Create an environment conda create --name py39 python=3.9  
+conda activate py39  
+pip install -U pip  
+pip install pipenv  
+pipenv install --dev  
+pipenv shell  
+
+### Development  
+**jupyter notebook**  
+
+Go the browser and open ./development/notebook.ipynb  
+Run all cells  
+
+**Trainning script**
+cd production
+python train.py
+
+Test with 
+python local_test.py
+
 ### Build
-docker build
+Go to the root directory of the project
+docker build --tag ml-fish-weight-prediction:latest .  
+
+**Local test**
+docker run --rm -p 9000:9000 ml-fish-weight-prediction:latest  
+In a new shell...  
+conda activate py39  
+pipenv shell  
+cd ./production  
+python local_test.py  
+
 ### Deploy
-Local
 To cloud. 
 
 # Definitions
