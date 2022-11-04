@@ -8,6 +8,7 @@ sklearn = "*"
 numpy = "*"
 pandas = "*"
 xgboost = "*"
+flask = "*"
 
 [dev-packages]
 ipython = "*"
@@ -16,6 +17,7 @@ matplotlib = "*"
 seaborn = "*"
 pyarrow = "*"
 ipykernel = "*"
+requests = "*"
 
 [requires]
 python_version = "3.9"
