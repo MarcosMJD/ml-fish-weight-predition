@@ -1,51 +1,97 @@
 # Fish Weight Prediction
 
-ML project to predict the weight of a fish from its dimensions.
+Machine Learning project to predict the weight of a fish from its dimensions and specie.
 
 ## Project description
 
+The goal is to productionize a web service for the end users that will predict the weight of a fish from its dimensions for 7 different species.
+
 ## Dataset description
+This dataset is a record of 7 common different fish species in fish market sales. With this dataset, a predictive model can be performed using machine friendly data and estimate the weight of fish can be predicted.
+https://www.kaggle.com/datasets/aungpyaeap/fish-market
+
+Size: 159 records
+7 columns
+Decimal: 6
+String: 1
+Species: species name of fish
+Weight: weight of fish in Gram g
+Length1: vertical length in cm
+Length2: diagonal length in cm
+Length3: cross length in cm
+Height: height in cm
+Width: diagonal width in cm
 
 ## How to run
 
-### Clone
-git clone ""
+### Clone the repo
+
+git clone https://github.com/MarcosMJD/ml-fish-weight-predition.git
 
 ### Setup
-Recommended to install Anaconda  
-Create an environment conda create --name py39 python=3.9  
-conda activate py39  
-pip install -U pip  
-pip install pipenv  
-pipenv install --dev  
-pipenv shell  
+It is recommended to install Anaconda or miniconda. The project has been developed with:
+- Anaconda (as the default framework, although in this particular project, only is used to get the python interpreter...)  
+- Visual Studio Code  
+- Windows 10  
+- git and GitBash.  
+
+You can use your own OS/python version manager. It is required python=3.9  
+
+Open a shell (GitBash, bash or Powershell) and execute the following instructions:
+
+Create a conda environment:  
+In the root directory of the repository, execute:
+`conda create --name py39 python=3.9`  
+`conda activate py39` 
+Install pip and pipenv  
+`pip install -U pip`   
+`pip install pipenv`   
+Create the environment and install dependencies  
+`pipenv install --dev`  
+Activate the environment  
+`pipenv shell`    
 
 ### Development  
-**jupyter notebook**  
 
-Go the browser and open ./development/notebook.ipynb  
-Run all cells  
+**jupyter notebook**  
+Start jupyter notebook with
+`jupyter notebook`
+
+Go the browser and open `./development/notebook.ipynb`  
+Run all cells check the EDA, tranning of models, model evaluation and model selection.    
 
 **Trainning script**
-cd production
-python train.py
+Go to the production directory and execute the trainning script:  
+`cd production`
+`python train.py`
+The model will be saved into the model directory.  
 
-Test with 
-python local_test.py
-
-### Build
-Go to the root directory of the project
-docker build --tag ml-fish-weight-prediction:latest .  
+### Prediction service
+The script predict.py will be used to receive the features and make the prediction.
+Flask and gunicorn will are used.  
 
 **Local test**
-docker run --rm -p 9000:9000 ml-fish-weight-prediction:latest  
-In a new shell...  
-conda activate py39  
-pipenv shell  
-cd ./production  
-python local_test.py  
+You can test the service with the following script.
+`python local_test.py`
 
-### Deploy
+### Build
+The model and prediction script will be containerized.  
+
+Go to the root directory of the project  
+`docker build --tag ml-fish-weight-prediction:latest .`  
+
+**Local test**
+Run the container:  
+`docker run --rm -p 9000:9000 ml-fish-weight-prediction:latest ` 
+Execute the test script in a new shell:  
+
+`conda activate py39`  
+`pipenv shell`  
+`cd ./production`  
+`python local_test.py`
+
+### Deployment
+
 To cloud. 
 
 # Definitions
@@ -76,8 +122,7 @@ Ridge:
 Higher the value of λ, greater will be the shrinkage of the β coefficients and this, in turn, makes the coefficients more robust to collinearity. Coefficients converge to 0 but does not make their value 0. This means that Ridge regression will not enforce the irrelevant variable coefficients to become 0 rather, it will reduce the impact of these variables on the model.
 Can be user when we have collinear features
 
-
-# Userful snippets
+# Useful snippets
 
 Remove outliers based on z-score (x-u/s)
 
@@ -86,4 +131,8 @@ from scipy import stats
 df[(np.abs(stats.zscore(df)) < 3).all(axis=1)]
 
 
-
+Enable conda in powershell. 
+powershell -executionpolicy remotesigned
+or in a powershell: set-executionpolicy remotesigned
+To check:
+get-executionpolicy (default is restricted)
