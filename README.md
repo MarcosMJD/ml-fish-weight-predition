@@ -86,9 +86,14 @@ The model and prediction script will be containerized.
 Go to the root directory of the project  
 `docker build --tag ml-fish-weight-prediction:latest .`  
 
+Note about Dockerfile
+entrypoint = start.sh. This script will change the directory to ./production.
+This is needed to allow production.py to find the model in the right directory.
+WARNING! Is you edit start.sh in Windows, change CRLF to LF.
+
 **Local test**
 Run the container:  
-`docker run --rm -p 8080:8080 ml-fish-weight-prediction:latest ` 
+`docker run --rm -p 8080:8080 ml-fish-weight-prediction:latest` 
 Execute the test script in a new shell:  
 
 `conda activate py39`  
