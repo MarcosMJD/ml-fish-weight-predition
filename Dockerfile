@@ -9,11 +9,10 @@ WORKDIR '/app'
 COPY ["Pipfile", "Pipfile.lock", "./"]
 RUN pipenv install --system --deploy
 
-COPY ["./production/predict.py", "./production/"]
+COPY ["./production/predict.py", "./production/dict_vect_transformer.py", "./production/start.sh", "./production/"]
 COPY ["./model/model.pkl", "./model/"]
-COPY ["./production/start.sh", "./production/"]
 
-EXPOSE 9000
+EXPOSE 8080
 
 # Running entrypoint = python ./production/predict.py, will make the working directory to be ./app
 # hence, the predict.py script will not find the model in the path ../model/ 

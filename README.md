@@ -44,7 +44,7 @@ In the root directory of the repository, execute:
 `conda create --name py39 python=3.9`  
 `conda activate py39` 
 Install pip and pipenv  
-`pip install -U pip`   
+`pip install -U pip` alternatively `python.exe -m pip install -U pip`
 `pip install pipenv`   
 Create the environment and install dependencies  
 `pipenv install --dev`  
@@ -61,18 +61,24 @@ Go the browser and open `./development/notebook.ipynb`
 Run all cells check the EDA, tranning of models, model evaluation and model selection.    
 
 **Trainning script**
-Go to the production directory and execute the trainning script:  
-`cd production`
+In the development directory, execute the trainning script:  
 `python train.py`
 The model will be saved into the model directory.  
 
 ### Prediction service
 The script predict.py will be used to receive the features and make the prediction.
-Flask and gunicorn will are used.  
+Flask is used as the application server. 
+Waitress is used as the WSGI.
+In Linux or MacOS, gunicorn may be used as well.  
 
 **Local test**
-You can test the service with the following script.
+Under production directory, start the server with:
+`waitress-serve predict:app`
+You can test the service with the following script, running on another shell (do not forget to pipenv shell)
 `python local_test.py`
+The prediction shall be:
+Predicted weight = 331.0716247558594
+rmse = 8.928375244140625
 
 ### Build
 The model and prediction script will be containerized.  
@@ -82,7 +88,7 @@ Go to the root directory of the project
 
 **Local test**
 Run the container:  
-`docker run --rm -p 9000:9000 ml-fish-weight-prediction:latest ` 
+`docker run --rm -p 8080:8080 ml-fish-weight-prediction:latest ` 
 Execute the test script in a new shell:  
 
 `conda activate py39`  
@@ -108,6 +114,9 @@ SSred = sum(y-ypred)**2
 SStot = sum(y-mean(y))**2
 
 # Notes
+
+About WSGI
+https://python-docs.readthedocs.io/en/latest/scenarios/web.html
 
 When the cv argument is an integer, cross_val_score uses the KFold or StratifiedKFold strategies by default, the latter being used if the estimator derives from ClassifierMixin.
 

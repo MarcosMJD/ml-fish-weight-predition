@@ -5,31 +5,16 @@ from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import make_pipeline
 from sklearn.compose import ColumnTransformer
-from sklearn.base import TransformerMixin, BaseEstimator
 from sklearn.preprocessing import StandardScaler
 from sklearn.feature_extraction import DictVectorizer
 from xgboost.sklearn import XGBRegressor
 from pathlib import Path
-
+from dict_vect_transformer import ToDictTransformer
 
 DATASET_PATH = '../data/'
 MODEL_PATH = '../model/'
 DATASET_FILENAME = DATASET_PATH + 'fish.zip'
 MODEL_FILENAME = MODEL_PATH + 'model.pkl'
-
-class ToDictTransformer(TransformerMixin, BaseEstimator):
-
-  def __init__(self):
-    self.columns = None
-
-  def fit(self, df, y=None):
-    return self
-
-  def transform(self, df):
-    return df.to_dict(orient='records')
-
-  def get_feature_names_out(self, *args, **kwargs):
-    return self.columns
 
 def remove_outliers(df, columns):
     df = df.copy()

@@ -9,6 +9,7 @@ numpy = "*"
 pandas = "*"
 xgboost = "*"
 flask = "*"
+waitress = "*"
 
 [dev-packages]
 ipython = "*"
