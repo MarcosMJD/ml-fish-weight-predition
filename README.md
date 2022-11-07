@@ -22,6 +22,8 @@ https://www.kaggle.com/datasets/aungpyaeap/fish-market
 - Height: height in cm
 - Width: diagonal width in cm
 
+ ![measures](/assets/measure.gif)
+
 ## How to run
 
 ### Clone the repo
