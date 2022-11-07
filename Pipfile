@@ -19,6 +19,7 @@ seaborn = "*"
 pyarrow = "*"
 ipykernel = "*"
 requests = "*"
+awsebcli = "*"
 
 [requires]
 python_version = "3.9"

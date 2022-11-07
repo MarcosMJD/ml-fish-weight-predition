@@ -103,7 +103,28 @@ Execute the test script in a new shell:
 
 ### Deployment
 
-To cloud. 
+The service is deployed in the following url:
+
+If you wish to deploy your own service, follow these instructions:  
+
+Setup AWS account:  
+Follow the instructions in this article: https://mlbookcamp.com/article/aws  
+
+Go to the root directory of the project:  
+`pipenv install --dev awsebcli`
+Create EB application (use your AWS region)  
+`eb init -p docker -r eu-west-1 fish-weight-prediction`  
+Test locally with:  
+`eb local run --port 8080`
+Create EB environment
+IMPORTANT WARNING: If you use Windows, you will have to set autocrlf in the local repo to false. To keep LF when pushing the files to EB.
+`git config core.autocrlf false`
+`eb create fish-weight-prediction-env`
+Copy the url after "Application available at"
+and use it in the constant URL in script eb_test.py
+Run the escript `eb_test.py`
+Terminate EB environment
+`eb terminate`
 
 # Definitions
 
@@ -120,11 +141,13 @@ SStot = sum(y-mean(y))**2
 
 # Notes
 
-About WSGI
+About WSGI  
 https://python-docs.readthedocs.io/en/latest/scenarios/web.html
 
+Crossvalidation cross_val_score  
 When the cv argument is an integer, cross_val_score uses the KFold or StratifiedKFold strategies by default, the latter being used if the estimator derives from ClassifierMixin.
 
+Why regularization needs standardization  
 If the independent variables are of different scale then penalty parameter will have a different impact on these variable coefficients and this would result in unfair shrinking since the penalized term is nothing but the sum of square of all coefficients. Hence to avoid this problem of unfair shrinking we standardize our input variable matrix in order to have variance 1.
 
 Lasso: 
@@ -138,15 +161,16 @@ Can be user when we have collinear features
 
 # Useful snippets
 
-Remove outliers based on z-score (x-u/s)
+Remove outliers based on z-score (x-u/s)  
 
-import numpy as np
+```
+import numpy as np  
 from scipy import stats
 df[(np.abs(stats.zscore(df)) < 3).all(axis=1)]
+```
 
-
-Enable conda in powershell. 
-powershell -executionpolicy remotesigned
-or in a powershell: set-executionpolicy remotesigned
+Enable conda in powershell.  
+`powershell -executionpolicy remotesigned`
+or in a powershell: `set-executionpolicy remotesigned`
 To check:
-get-executionpolicy (default is restricted)
+`get-executionpolicy` (default is restricted)
