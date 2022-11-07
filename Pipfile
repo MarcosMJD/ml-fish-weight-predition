@@ -20,6 +20,7 @@ pyarrow = "*"
 ipykernel = "*"
 requests = "*"
 awsebcli = "*"
+streamlit = "*"
 
 [requires]
 python_version = "3.9"
