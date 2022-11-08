@@ -3,8 +3,7 @@ import math
 
 # Bream	340.0	23.9	26.5	31.1	12.3778	4.6961
 
-URL = "http://fish-weight-prediction-env.eba-zarepmyp.eu-west-1.elasticbeanstalk.com:80/predict"
-
+URL = "http://127.0.0.1:3000/predict"
 y_true = 340.0
 
 test_data = {

@@ -10,11 +10,13 @@ from sklearn.feature_extraction import DictVectorizer
 from xgboost.sklearn import XGBRegressor
 from pathlib import Path
 from dict_vect_transformer import ToDictTransformer
+import bentoml
 
 DATASET_PATH = '../data/'
 MODEL_PATH = '../model/'
-DATASET_FILENAME = DATASET_PATH + 'fish.zip'
-MODEL_FILENAME = MODEL_PATH + 'model.pkl'
+MODEL_NAME = 'model'
+DATASET_FILENAME = f'{DATASET_PATH}fish.zip'
+MODEL_FILENAME = f'{MODEL_PATH}{MODEL_NAME}.pkl'
 
 def remove_outliers(df, columns):
     df = df.copy()
@@ -86,3 +88,6 @@ print(f'test_rmse = {test_rmse}')
 
 with open(MODEL_FILENAME, 'wb') as f_out:
     pickle.dump(train_pipeline, f_out)
+
+_model = bentoml.sklearn.save_model(f'{MODEL_NAME}_bento', train_pipeline)
+print (_model)

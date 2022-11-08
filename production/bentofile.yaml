@@ -1,0 +1,12 @@
+service: "predict_bento.py:svc"
+labels:
+  owner: marcos-mjd
+  project: fish-weight-prediction
+include:
+- predict_bento.py
+- dict_vect_transformer.py
+python:
+  packages:
+    - xgboost
+    - scikit-learn
+    - pandas
