@@ -196,6 +196,9 @@ Once the ECR cluster and task is created and the task is running, the service wi
 You can test with test.py (do not forget to change use the uri param accordingly)  
 Or directly, in the Swagger UI
 
+## Interactive test
+In your local machine, under production directory, run `streamlit run .\client.py` and have test you can change the URI of the API endpoint as needed.
+
 # Definitions
 
 R2 score (coefficient of determination)

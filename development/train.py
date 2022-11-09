@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import pickle
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
@@ -50,7 +49,6 @@ numerical = ['length1', 'height', 'width']
 raw_dataset.drop(raw_dataset[raw_dataset[target] < 1].index, axis=0, inplace=True)
 # Remove outliers
 dataset = remove_outliers(raw_dataset, numerical)
-
 
 df_full_train, df_test = train_test_split(raw_dataset, test_size=0.2, random_state=5, stratify=raw_dataset[categorical])
 df_train, df_val = train_test_split(raw_dataset, test_size=0.25, random_state=5, stratify=raw_dataset[categorical])
