@@ -3,7 +3,7 @@ import requests
 
 st.title('Fish weight prediction client app')
 
-st.image("../assets/measure.gif")
+st.image("../assets/measure.gif", width=450)
 
 API_URI = "http://localhost:8080/predict"
 
