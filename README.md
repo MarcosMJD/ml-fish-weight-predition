@@ -4,7 +4,21 @@ Machine Learning project to predict the weight of a fish from its dimensions and
 
 # Project description
 
-The goal is to productionize a web service for the end users that will predict the weight of a fish from its dimensions for 7 different species.
+The goal is to productionize a web service for the end users that will predict the weight of a fish from its dimensions for 7 different species.  
+The project will deal with a dataset which is small and with highly correlated features. The dataset is clean with a few sliders.  
+
+This project uses:
+
+Jupyter
+Numpy/Pandas
+MatplotLib/Seaborn
+Scikit-learn (linear regressors, decision trees, random forest)
+XGBoost
+Docker
+AWS Elastic Beanstalk
+AWS ECR
+AWS ECS
+Streamlit
 
 # Dataset description
 This dataset is a record of 7 common different fish species in fish market sales. With this dataset, a predictive model can be performed using machine friendly data and estimate the weight of fish can be predicted.
@@ -86,8 +100,8 @@ Execute the test script in a new shell:
 `cd ./production`  
 `python test.py`  
 The prediction shall be:  
-Predicted weight = 331.0716247558594  
-rmse = 8.928375244140625  
+Predicted weight = 335.184326171875  
+rmse = 4.815673828125  
 
 You can parametrize uri:
 `python test.py --uri http://127.0.0.1:8080/predict`
@@ -116,6 +130,13 @@ Execute the test script in a new shell:
 Test again:  
 `python test.py --uri http://127.0.0.1:8080/predict`
 
+## Deployment
+Temporarily, you can find the service running on 34.240.92.102 on AWS ECS. If it does not work, please, launch your own deployment with the instructions below  
+Test it with:  
+`python test.py --uri http://34.240.92.102:3000/predict`
+Or with:
+`streamlit run client.py`
+on the production subdirectory. Also, configure the URI acordingly.  
 
 ## Deployment with Elastic Beanstalk
 
@@ -140,9 +161,9 @@ Create EB environment
 Create the EB environment:  
 `eb create fish-weight-prediction-env`  
 Copy the url after "Application available at"  
-and use it in the constant URI in script test.py  
+and use in the call to `test.py`  
 Run the escript `eb_test.py`  
-Terminate EB environment  
+`python test.py --uri http://<your-url>:8080/predict`   
 `eb terminate`   
 
 ## Build the service with BentoML
@@ -192,7 +213,7 @@ Push the image to the ECR registry:
 `docker push 546106488772.dkr.ecr.eu-west-1.amazonaws.com/fish-weight-prediction`  
 
 Create an ECR cluster by following this video:  https://youtu.be/aF-TfJXQX-w?t=514  
-Once the ECR cluster and task is created and the task is running, the service will be found in the public ip and port used.  
+Once the ECR cluster and task is created and the task is running, the service will be found in the public ip and port used. You can find this information under the running task information page (on the network section).  
 You can test with test.py (do not forget to change use the uri param accordingly)  
 Or directly, in the Swagger UI
 

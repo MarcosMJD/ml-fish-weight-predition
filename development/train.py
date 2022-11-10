@@ -50,8 +50,8 @@ raw_dataset.drop(raw_dataset[raw_dataset[target] < 1].index, axis=0, inplace=Tru
 # Remove outliers
 dataset = remove_outliers(raw_dataset, numerical)
 
-df_full_train, df_test = train_test_split(raw_dataset, test_size=0.2, random_state=5, stratify=raw_dataset[categorical])
-df_train, df_val = train_test_split(raw_dataset, test_size=0.25, random_state=5, stratify=raw_dataset[categorical])
+df_full_train, df_test = train_test_split(dataset, test_size=0.2, random_state=5, stratify=dataset[categorical])
+df_train, df_val = train_test_split(df_full_train, test_size=0.25, random_state=5, stratify=df_full_train[categorical])
 
 y_full_train = df_full_train[target].values
 y_train = df_train[target].values
