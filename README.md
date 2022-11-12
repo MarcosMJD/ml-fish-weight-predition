@@ -131,7 +131,7 @@ Test again:
 `python test.py --uri http://127.0.0.1:8080/predict`
 
 ## Deployment
-Temporarily, you can find the service running on 34.240.92.102 on AWS ECS. If it does not work, please, launch your own deployment with the instructions below  
+Temporarily, you can find the service running on http://34.240.92.102:3000/ on AWS ECS. If it does not work, please, launch your own deployment with the instructions below  
 Test it with:  
 `python test.py --uri http://34.240.92.102:3000/predict`
 Or with:
